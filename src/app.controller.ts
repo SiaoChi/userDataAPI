@@ -7,18 +7,20 @@ export class AppController {
 
   @Get('/api/users')
   getUserData(@Query() query: any): object {
-    const { createFrom, createdTo, jobType } = query;
-    // const paramToCheck = createFrom || createdTo || jobType;
+    const { createFrom, createdTo, jobType, page } = query;
+    const limit = 10;
 
-    if (createFrom) {
-      return this.appService.queryCreateFromUsersData(createFrom);
+    if (createFrom || createdTo || jobType) {
+      const paginatedData = this.appService.queryUsersData(
+        createFrom,
+        createdTo,
+        jobType,
+        page,
+        limit,
+      );
+
+      return paginatedData;
     }
-    if (createdTo) {
-      return this.appService.queryCreateToUsersData(createdTo);
-    }
-    if (jobType) {
-      return this.appService.queryJobTypeUsersData(jobType);
-    }
-    return this.appService.getUsersData();
+    return this.appService.getUsersDataPag(page, limit);
   }
 }
