@@ -1,30 +1,86 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+[![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)](https://nestjs.com/)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+[![logo](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/en/)
 
-## Description
+# Query API design
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Introduction
+
+This document outlines the design of the scooter rental API for interview process.
+
+## API mission
+
+#### 1. Get userData using user API and userDetail API those have same userID. Must have pagination design.
+
+```
+GET /api/users
+```
+
+#### Response
+
+```
+ [
+      {
+        name: 'Mr. Jermaine Volkman',
+        jobType: 'Agent',
+        id: '1',
+        createdAt: '2023-07-30T09:33:03.230Z',
+        city: 'Lake Shaina',
+        zipCode: '49081',
+        address: '852 Gerhold Overpass',
+        gender: 'M2F',
+      },
+      {
+        name: 'Jason Beier',
+        jobType: 'Strategist',
+        id: '2',
+        createdAt: '2022-09-18T14:21:44.115Z',
+        city: 'Fort Ruben',
+        zipCode: '34702-3516',
+        address: '5332 Antoinette Courts',
+        gender: 'female',
+      },
+      {}...
+    ];
+
+```
+
+#### 2. Query userData using Query URL include `jobType`, `createdTo`, `createFrom`, can use mutipal query or single query and must have pagination design.
+
+```
+GET /api/users?jobType=${params}&createdTo=${params}&createFrom=${params}
+
+ex. http://127.0.0.1:3000/api/users?createdTo=2023-09-09&createFrom=2021-01-10&jobType=Strategist&page=1
+```
+
+### Response
+
+```
+[
+    {
+        "name": "Jason Beier",
+        "jobType": "Strategist",
+        "id": "2",
+        "createdAt": "2022-09-18T14:21:44.115Z",
+        "city": "Fort Ruben",
+        "zipCode": "34702-3516",
+        "address": "5332 Antoinette Courts",
+        "gender": "Trigender"
+    },
+    {
+        "name": "Sheryl Hermann",
+        "jobType": "Strategist",
+        "id": "43",
+        "createdAt": "2023-03-14T22:13:53.432Z",
+        "city": "Ogden",
+        "zipCode": "20433-8297",
+        "address": "0626 Cartwright Land",
+        "gender": "Woman"
+    }
+]
+```
 
 ## Installation
 
@@ -45,29 +101,14 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Running Tests
 
-```bash
-# unit tests
-$ npm run test
+To run tests, run the following command
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```
+  npm run test
 ```
 
-## Support
+## Authors
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- [@KellyGuo](https://www.github.com/siaochi)
