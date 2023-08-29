@@ -85,39 +85,3 @@ export class AppService {
     return paginatedData;
   }
 }
-// async queryUsersData(
-//   createFrom: string | null,
-//   createdTo: string | null,
-//   jobType: string | null,
-// ): Promise<UsersDetailsDto[]> {
-//   console.log('run queryUsersData');
-//   const getUsersData = await this.getUsersData();
-//   if (createFrom === null && createdTo === null && jobType === null) {
-//     return getUsersData;
-//   }
-//   // console.log(createFrom, createdTo, jobType);
-//   const res = getUsersData.filter((item) => {
-//     const itemTimestamp = new Date(item.createdAt).getTime();
-//     let meetsConditions = true;
-
-//     if (createFrom !== undefined) {
-//       // console.log('run createFrom');
-//       const createFromDate = new Date(createFrom).getTime();
-//       meetsConditions = meetsConditions && itemTimestamp >= createFromDate;
-//     }
-
-//     if (createdTo !== undefined) {
-//       // console.log('run createTo');
-//       const createdToDate = new Date(createdTo).getTime();
-//       meetsConditions = meetsConditions && itemTimestamp <= createdToDate;
-//     }
-
-//     if (jobType !== undefined) {
-//       // console.log('run jobType');
-//       meetsConditions = meetsConditions && item.jobType === jobType;
-//     }
-//     return meetsConditions;
-//   });
-
-//   return res;
-// }
